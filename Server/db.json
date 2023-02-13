@@ -1,0 +1,41 @@
+{
+  "Books": [
+    {
+      "id": 1,
+      "name": "Naruto Volume 1",
+      "artist": "Masashi Kishimoto",
+      "avaliability": "Yes",
+      "price": 500
+    },
+    {
+      "id": 2,
+      "name": "Bleach Volume 4",
+      "artist": "Tite Kubo",
+      "avaliability": "Yes",
+      "price": 450
+    },
+    {
+      "id": 3,
+      "name": "Hunter X Hunter Volume 3",
+      "artist": "Yoshihiro Togashi",
+      "avaliability": "Yes",
+      "price": 400
+    }
+  ],
+  "Favourites": [
+    {
+      "id": 2,
+      "name": "Bleach Volume 4",
+      "artist": "Tite Kubo",
+      "avaliability": "Yes",
+      "price": 450
+    },
+    {
+      "id": 1,
+      "name": "Naruto Volume 1",
+      "artist": "Masashi Kishimoto",
+      "avaliability": "Yes",
+      "price": 500
+    }
+  ]
+}
