@@ -12,43 +12,37 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-const AddBooks = () => {
+const EditBook = () => {
   const navigate = useNavigate();
 
-  const [newBook, setNewBook] = useState({
+  const { id } = useParams();
+
+  const [book, setBook] = useState({
     name: "",
     artist: "",
     avaliability: "",
     price: "",
   });
 
+  useEffect(() => {
+    const getBook = async () => {
+      const book = await axios.get(`http://localhost:4000/Books/${id}`);
+      setBook(book.data);
+    };
+    getBook();
+  }, [id]);
+
   const onValueChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setNewBook({ ...newBook, [name]: value });
+    console.log(e.target.value);
+    setBook({ ...book, [e.target.name]: e.target.value });
   };
 
-  const addManga = async () => {
-    if (
-      newBook.name &&
-      newBook.avaliability &&
-      newBook.artist &&
-      newBook.price
-    ) {
-      await axios.post("http://localhost:4000/Books", newBook);
-      setNewBook({
-        name: "",
-        artist: "",
-        avaliability: "",
-        price: "",
-      });
-      navigate("/all_books");
-    } else {
-      alert("please add all details");
-    }
+  const updateBook = async () => {
+    await axios.put(`http://localhost:4000/Books/${id}`, book);
+    navigate("/all_books");
   };
 
   return (
@@ -56,12 +50,12 @@ const AddBooks = () => {
       <VStack>
         <Container
           maxW={"container.md"}
-          mt={"40"}
+          mt={"32"}
           shadow={"dark-lg"}
           p={"5"}
           borderRadius={"xl"}
           position={"absolute"}
-          bgColor={"white"}
+          bgColor={"whiteAlpha.900"}
         >
           <Heading mb={6}>Add Manga</Heading>
           <SimpleGrid columns={2} columnGap={3} rowGap={2}>
@@ -69,11 +63,10 @@ const AddBooks = () => {
               <FormControl>
                 <FormLabel>Name</FormLabel>
                 <Input
-                  placeholder="Name of Manga"
-                  required
+                  placeholder="Name of book"
                   type={"text"}
                   name="name"
-                  value={newBook.name}
+                  value={book.name}
                   onChange={onValueChange}
                 ></Input>
               </FormControl>
@@ -85,7 +78,7 @@ const AddBooks = () => {
                   type={"text"}
                   placeholder="Name of Artist"
                   name="artist"
-                  value={newBook.artist}
+                  value={book.artist}
                   onChange={onValueChange}
                 ></Input>
               </FormControl>
@@ -95,7 +88,7 @@ const AddBooks = () => {
                 <FormLabel>Avaliability</FormLabel>
                 <Select
                   name="avaliability"
-                  value={newBook.avaliability}
+                  value={book.avaliability}
                   onChange={onValueChange}
                 >
                   <option>Select...</option>
@@ -111,7 +104,7 @@ const AddBooks = () => {
                   type={"number"}
                   name="price"
                   placeholder="$"
-                  value={newBook.price}
+                  value={book.price}
                   onChange={onValueChange}
                 ></Input>
               </FormControl>
@@ -122,7 +115,7 @@ const AddBooks = () => {
                   w={"full"}
                   colorScheme={"green"}
                   mt={5}
-                  onClick={() => addManga()}
+                  onClick={() => updateBook()}
                 >
                   Add Book
                 </Button>
@@ -141,4 +134,4 @@ const AddBooks = () => {
   );
 };
 
-export default AddBooks;
+export default EditBook;

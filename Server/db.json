@@ -2,40 +2,68 @@
   "Books": [
     {
       "id": 1,
-      "name": "Naruto Volume 1",
+      "name": "Naruto Volume 2",
       "artist": "Masashi Kishimoto",
       "avaliability": "Yes",
       "price": 500
     },
     {
-      "id": 2,
-      "name": "Bleach Volume 4",
+      "name": "Anubhav",
       "artist": "Tite Kubo",
-      "avaliability": "Yes",
-      "price": 450
+      "avaliability": "No",
+      "price": "22",
+      "id": 2
     },
     {
-      "id": 3,
-      "name": "Hunter X Hunter Volume 3",
-      "artist": "Yoshihiro Togashi",
+      "name": "javascript-socket-io-chat-assignment",
+      "artist": "Masashi Kishimot",
       "avaliability": "Yes",
-      "price": 400
+      "price": "22",
+      "id": 3
+    },
+    {
+      "name": "Naruto Volume 2",
+      "artist": "Masashi Kishimot",
+      "avaliability": "No",
+      "price": "33",
+      "id": 4
+    },
+    {
+      "name": "stack_nodejs / expense_manager_app",
+      "artist": "Tite Kubo",
+      "avaliability": "Yes",
+      "price": "88",
+      "id": 5
+    },
+    {
+      "name": "Anubhav",
+      "artist": "Masashi Kishimot",
+      "avaliability": "No",
+      "price": "47",
+      "id": 7
+    },
+    {
+      "name": "Bleach Volume 2",
+      "artist": "Tite Kubo",
+      "avaliability": "Yes",
+      "price": "44",
+      "id": 8
     }
   ],
   "Favourites": [
-    {
-      "id": 2,
-      "name": "Bleach Volume 4",
-      "artist": "Tite Kubo",
-      "avaliability": "Yes",
-      "price": 450
-    },
     {
       "id": 1,
       "name": "Naruto Volume 1",
       "artist": "Masashi Kishimoto",
       "avaliability": "Yes",
       "price": 500
+    },
+    {
+      "name": "Naruto Volume 2",
+      "artist": "Masashi Kishimot",
+      "avaliability": "No",
+      "price": "33",
+      "id": 4
     }
   ]
 }

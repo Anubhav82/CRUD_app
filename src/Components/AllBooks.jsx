@@ -14,25 +14,27 @@ import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
 import Loader from "./Loader";
 import Background from "../Assests/Background.jpg";
+import { Link } from "react-router-dom";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const getAllBooks = async () => {
+    try {
+      const data = await axios.get("http://localhost:4000/Books");
+      setBooks(data.data);
+      setIsLoading(false);
+    } catch (error) {
+      setError(true);
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const addBooks = async () => {
-      try {
-        const data = await axios.get("http://localhost:4000/Books");
-        setBooks(data.data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(true);
-        setIsLoading(false);
-      }
-    };
-    addBooks();
-  }, []);
+    getAllBooks();
+  }, [books]);
 
   const addToFavourite = async (id) => {
     const fav = books.filter((book) => book.id === id);
@@ -42,9 +44,10 @@ const AllBooks = () => {
 
   const handleRemove = async (id) => {
     await axios.delete(`http://localhost:4000/Books/${id}`);
-    const filteredBooks = books.filter((book) => book.id !== id);
     await axios.delete(`http://localhost:4000/Favourites/${id}`);
-    setBooks(filteredBooks);
+    // const filteredBooks = books.filter((book) => book.id !== id);
+    // setBooks(filteredBooks);
+    getAllBooks();
   };
 
   if (error) {
@@ -56,34 +59,35 @@ const AllBooks = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Box>
+        <Box alignItems={"center"} scrollBehavior={"smooth"}>
           <TableContainer
             position={"absolute"}
-            w={"80%"}
+            w={"90%"}
             shadow={"dark-lg"}
+            ml={"24"}
             mt={"40"}
-            ml={"48"}
             p={5}
             mb={"20"}
-            bgColor={"whiteAlpha.900"}
-            zIndex={0}
+            h={"80vh"}
+            overflowY={"auto"}
           >
             <Table size="lg">
-              <Thead>
+              <Thead bgColor={"black"}>
                 <Tr
                   textTransform={"uppercase"}
                   fontSize={"3xl"}
                   fontWeight={"bold"}
-                  color={"gray.700"}
+                  color={"white"}
                 >
                   <Td>Sr.</Td>
                   <Td>Name</Td>
                   <Td>Artist</Td>
                   <Td>Avaliability</Td>
                   <Td>Price</Td>
+                  <Td textAlign={"center"}>Actions</Td>
                 </Tr>
               </Thead>
-              <Tbody>
+              <Tbody bgColor={"white"}>
                 {books.map((book, index) => {
                   return (
                     <Tr fontSize={"xl"} key={index}>
@@ -94,15 +98,22 @@ const AllBooks = () => {
                       <Td>Rs.{book.price}</Td>
                       <Td>
                         <Button
+                          m={3}
                           variant={"outline"}
                           colorScheme={"green"}
                           onClick={() => addToFavourite(book.id)}
                         >
                           Add to Favourite
                         </Button>
-                      </Td>
-                      <Td>
+
+                        <Link to={`/edit/${book.id}`}>
+                          <Button m={3} colorScheme={"facebook"}>
+                            Edit
+                          </Button>
+                        </Link>
+
                         <Button
+                          m={3}
                           colorScheme={"red"}
                           onClick={() => handleRemove(book.id)}
                         >
@@ -115,7 +126,7 @@ const AllBooks = () => {
               </Tbody>
             </Table>
           </TableContainer>
-          <Image src={Background} w={"full"} h={"100vh"} />
+          <Image src={Background} w={"full"} h={"130vh"} />
         </Box>
       )}
     </>

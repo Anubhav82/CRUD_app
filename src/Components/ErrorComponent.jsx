@@ -1,20 +1,22 @@
-import { Container, Heading, Text } from "@chakra-ui/react";
+import { Heading, Image, Stack } from "@chakra-ui/react";
 import React from "react";
+import error from "../Assests/Error.png";
 
 const ErrorComponent = ({ message }) => {
   return (
-    <>
-      <Container
-        maxW={"container.lg"}
-        h={"10vh"}
-        bgColor={"red.300"}
-        mt={"18%"}
-        alignSelf={"Center"}
-        align={"center"}
-      >
-        <Heading p={4}>{message}</Heading>
-      </Container>
-    </>
+    <Stack
+      h={"100vh"}
+      w={"full"}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      <Stack textAlign={"center"} border={"2px"}>
+        <Image src={error} w={"600px"} h={"400px"} />
+        <Heading p={10} color={"red"}>
+          {message}
+        </Heading>
+      </Stack>
+    </Stack>
   );
 };
 

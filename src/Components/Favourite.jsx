@@ -35,28 +35,29 @@ const Favourite = () => {
       <VStack>
         <TableContainer
           w={"80%"}
-          shadow={"dark-lg"}
-          mt={"10"}
+          mt={"40"}
           p={5}
           position={"absolute"}
-          bgColor={"whiteAlpha.900"}
+          h={"80vh"}
+          overflowY={"auto"}
         >
           <Table size="lg">
-            <Thead>
+            <Thead bgColor={"black"}>
               <Tr
                 textTransform={"uppercase"}
                 fontSize={"3xl"}
                 fontWeight={"bold"}
-                color={"gray.700"}
+                color={"white"}
               >
                 <Td>Sr.</Td>
                 <Td>Name</Td>
                 <Td>Artist</Td>
                 <Td>Avaliability</Td>
                 <Td>Price</Td>
+                <Td>Action</Td>
               </Tr>
             </Thead>
-            <Tbody>
+            <Tbody bgColor={"white"}>
               {books.map((book, index) => {
                 return (
                   <Tr fontSize={"xl"} key={index}>

@@ -4,8 +4,8 @@ import img2 from "../Assests/img2.jpg";
 
 const Footer = () => {
   return (
-    <Box bgColor={"blackAlpha.900"} minH={"28"}>
-      <HStack justifyContent={"space-between"} p={"4"}>
+    <Box bgColor={"blackAlpha.900"} maxH={"40"} position={"sticky"}>
+      <HStack justifyContent={"space-between"}>
         <VStack
           alignItems={"flex-start"}
           borderRight={"2px"}
